@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Encryption Service</title>
+    <link href="./css/index.css" rel="stylesheet">
+    <script src="./js/amd.js"></script>
+    <script src="./js/app.js"></script>
+    <script>
+        runmodule("main");
+    </script>
+</head>
+
+<body>
+    <div class="config">
+        <h1>Message Encryption Service</h1>
+        <p>I want to:
+            <select id="config-intent">
+                <option selected>Encrypt an outbound message</option>
+                <option>Decrypt an inbound message</option>
+                <option>Generate a public-private key pair</option>
+            </select>
+        </p>
+    </div>
+    <hr>
+    <section id="outbound" class="screen">
+        <h1 class="heading">Encrypt Outbound Message</h1>
+        <div class="content">
+            <section>
+                <h2 class="heading">Configuration</h2>
+                <div class="content">
+                    <p>
+                        Public key of the reciever:
+                        <span id="outbound-publickeystatus">Not loaded.</span>
+                        <input type="file" id="outbound-publickeyfile">
+                        <button id="outbound-publickeyload">Load Public Key</button>
+                    </p>
+                </div>
+            </section>
+            <section>
+                <h2 class="heading">Message Data</h2>
+                <div class="content">
+                    <p>Message Type:
+                        <select id="outbound-messagetype">
+                            <option selected>Plaintext</option>
+                            <option>HTML</option>
+                            <option>Markdown</option>
+                            <option>File</option>
+                        </select>
+                    </p>
+                    <div id="outbound-textmessage">
+                        <p id="outbound-textmessage-updatepreviewcontainer" hidden>
+                            <button id="outbound-textmessage-updatepreview">Update Preview</button>
+                        </p>
+                        <textarea id="outbound-textmessage-input"></textarea>
+                        <div id="outbound-textmessage-preview" class="preview" hidden>
+                            Message Preview Goes Here
+                        </div>
+                    </div>
+                    <div id="outbound-file" hidden>
+                        <p>File chosen: <span id="outbound-file-name">None</span></p>
+                        <p>File size: <span id="outbound-file-size">N/A</span> bytes</p>
+                        <span id="outbound-file-status">Not loaded</span>
+                        <input type="file" id="outbound-file-input">
+                        <button id="outbound-file-load">Load File</button>
+                    </div>
+                </div>
+            </section>
+            <button class="action">Encrypt Outbound Message</button>
+        </div>
+    </section>
+    <section id="inbound" class="screen" hidden>
+        <h1 class="heading">Decrypt Inbound Message</h1>
+        <div class="content">
+            <section>
+                <h2 class="heading">Configuration</h2>
+                <div class="content">
+                    <p>Private Key:
+                        <span id="inbound-secretkeystatus">Not loaded.</span>
+                        <input type="file" id="inbound-secretkeyfile">
+                        <button id="inbound-secretkeyload">Load Private Key</button>
+                    </p>
+                    <p>
+                        Message Output Type:
+                        <select id="inbound-outputoverridetype">
+                            <option selected>Text</option>
+                            <option>Formatted/HTML/Markdown</option>
+                            <option>File</option>
+                        </select>
+                    </p>
+                </div>
+            </section>
+            <section>
+                <h2 class="heading">Message Body</h2>
+                <div class="content">
+                    <div id="inbound-file">
+                        <p>Select a file with the fields below.</p>
+                        <p>
+                            File size:
+                            <span id="inbound-file-size">N/A</span>
+                            bytes.
+                        </p>
+                        <p>
+                            <span id="inbound-file-status">No file loaded.</span>
+                            <input type="file" id="inbound-file-input">
+                            <button id="inbound-file-load">Load file</button>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <button class="action">Decrypt Inbound Message</button>
+        </div>
+    </section>
+    <section id="keypair" class="screen" hidden>
+        <h1 class="heading">Generate Public-Private Key Pair</h1>
+        <div class="content">
+            <p>
+                Press the button to generate a public-private key pair. In general, you only need to do this once.
+            </p>
+            <button class="action">Generate Public-Private Key Pair</button>
+        </div>
+    </section>
+    <hr>
+    <section id="output">
+        <h1 class="heading">Output</h1>
+        <div class="content">
+            <div id="output-none">
+                <p>Nothing has been outputted yet.</p>
+            </div>
+            <div id="output-progress">
+                <p>Working, please wait...</p>
+                <progress></progress>
+            </div>
+            <div id="output-text">
+                <p>Output contents are below. <button id="output-text-copy">Copy contents</button></p>
+                <textarea id="output-text-content" readonly placeholder></textarea>
+            </div>
+            <div id="output-formatted">
+                <p>Output contents are below. <button id="output-formatted-download">Download as HTML</button></p>
+                <div id="outbound-formatted-preview" class="preview"></div>
+            </div>
+            <div id="output-file">
+                <p>Output is <span id="output-file-size">N/A</span> bytes in size.
+                    <button id="output-file-download">Download output</button>
+                </p>
+            </div>
+            <div id="output-keypair">
+                <p>A new public-private key pair has been created.</p>
+                <button id="output-keypair-downloadpublic">Download public key</button>
+                <button id="output-keypair-downloadsecret">Download private key</button>
+            </div>
+            <div id="output-error">
+                <p class="failure">An error has occured.</p>
+                <pre id="output-error-contents"></pre>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <hr>
+        <p><i>Email Security Authority</i></p>
+        <p>This program is licensed under 0BSD. Read the <code>LICENSE</code> file contained within the distribution
+            folder for more information.</p>
+    </footer>
+    </div>
+</body>
+
+</html>

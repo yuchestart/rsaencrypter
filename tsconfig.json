@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module":"AMD",
+        "target":"ESNext",
+        "outFile":"build/js/app.js"
+    },
+    "include":[
+        "./src"
+    ]
+}

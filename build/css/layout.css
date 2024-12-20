@@ -1,0 +1,20 @@
+section{
+    margin-left:10px;
+}
+
+button{
+    cursor:pointer;
+    border:1px solid black;
+    background:linear-gradient(rgb(206, 206, 206) 0%, rgb(175, 175, 175) 100%);
+    &:hover{
+        background:linear-gradient(rgb(255, 255, 255) 0%, rgb(219, 219, 219) 100%);
+    }
+    &:active{
+        background:linear-gradient(rgb(148, 148, 148) 0%, rgb(49, 49, 49) 100%);
+        color:white;
+    }
+}
+
+.heading{
+    cursor:pointer;
+}

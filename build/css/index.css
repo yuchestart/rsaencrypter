@@ -1,0 +1,19 @@
+@import url("./footer.css");
+@import url("./layout.css");
+
+html{
+    font-family:sans-serif;
+}
+
+.bold{
+    font-weight:bold;
+}
+
+.failure{
+    color:red;
+    font-weight:bold;
+}
+
+.success{
+    color:green;
+}

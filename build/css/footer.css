@@ -1,0 +1,10 @@
+footer{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+    left:0px;
+    margin:8px 8px 8px 8px;
+    text-align:center;
+    min-height:70px;
+    display:block;
+}
